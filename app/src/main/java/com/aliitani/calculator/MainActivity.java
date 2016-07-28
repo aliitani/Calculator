@@ -4,74 +4,143 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    String num1 = "", num2 = "", mathAction = "";;
-    boolean mathClick = false;
-
+    String num1 = "", num2 = "", mathAction = "", mathText = "";
+    boolean mathClick = false, decimal = false, decDone1 = true, decDone2 = true;
     Button button;
     TextView textView;
 
     public void Clear(View view) {
-
+        textView = (TextView) findViewById(R.id.Screen);
+        textView.setText("");
         num1 = "";
         num2 = "";
         mathClick = false;
+        mathText = "";
+        decimal = false;
+        decDone1 = true;
+        decDone2 = true;
 
     }
 
     public void total(View view) {
         textView = (TextView) findViewById(R.id.Screen);
-
-        textView.setText("" + Calculation(num1,num2,mathAction));
+        String total = Calculation(num1,num2,mathAction);
+        if (total.length() < 13) {
+            textView.setText(num1 + mathText + num2 + "\n" + total);
+        } else {
+            textView.setText(num1 + mathText + num2 + "\n" + total.substring(0, 12));
+        }
         System.out.println(Calculation(num1, num2, mathAction));
-
-        Clear(null);
     }
-    public int Calculation(String a, String b, String key) {
-        int a1 = Integer.parseInt(a);
-        int b1 = Integer.parseInt(b);
+    public String Calculation(String a, String b, String key) {
 
-        if (key.equals("Sum")) {return a1 + b1;}
-        if (key.equals("Diff")) {
 
-            if (a1 < b1) {
-                return (int) b1 - a1;
-            } else {
-                return (int) a1 - b1; // that is either if a1 > b1 or a1 == b1
-            }
+        try {
+            if (decimal) {
+
+                double d1 = Double.parseDouble(a);
+                double d2 = Double.parseDouble(b);
+
+                if (key.equals("Sum")) {
+                    return ""+ (d1+d2);
+                }
+                if (key.equals("Diff")) {
+
+                    return "" + (d1 - d2);
+
+                }
+                if (key.equals("Product")) {
+                    return "" + (d1 * d2);
+                }
+                if (key.equals("Divide")) {
+                    System.out.println("Here");
+                    return "" + (d1/d2);
+                }
+
+            }else {
+                int a1 = Integer.parseInt(a);
+                int b1 = Integer.parseInt(b);
+
+                if (key.equals("Sum")) {
+                    return "" + (a1 + b1);
+                }
+                if (key.equals("Diff")) {
+                   return "" + (a1 - b1);
+                }
+                if (key.equals("Product")) {
+                   return "" + a1 * b1;
+                }
+                if (key.equals("Divide")) {
+                    System.out.println("Here");
+                    return "" + ((double) a1/b1);
+                }
+
+                }
+        } catch (Exception e) {
 
         }
-        if (key.equals("Product")) {return a1 * b1;}
-        if (key.equals("Divide")) {return (int) a1 / b1;}
 
 
-        return 0;
+        return "";
     }
 
     public void Math(View view){ // that is when we use + - * / and to use num2
         button = (Button) view;
 
         mathAction = button.getTag().toString();
-        System.out.println(mathAction);
-        mathClick = true;
+        mathText = button.getText().toString();
+        textView = (TextView) findViewById(R.id.Screen);
+        textView.append(button.getText().toString());
 
+        System.out.println(mathAction);
+
+        mathClick = true;
     }
     public void buttonTapped(View view) {
 
         button = (Button) view;
+        textView = (TextView) findViewById(R.id.Screen);
 
-        if (mathClick == false) {
+        if (button.getTag().equals(".")) {
+            decimal = true;
 
-            num1 += button.getTag().toString();
-            System.out.println(num1);
-        } else {
+            if (decDone1) {
+                decDone1 = false;
+                num1+= ".";
+                textView.setText(num1);
+                System.out.println(num1);
 
-            num2 += button.getTag().toString();
-            System.out.println(num2);
+
+            } else{
+                if (mathClick && decDone2) {
+                    num2 += ".";
+                    textView.setText("");
+                    textView.setText(num1 + mathText + num2);
+                    System.out.println(num2);
+                    decDone2 = false;
+                }
+            }
+        }
+        if (!button.getTag().equals(".")){
+            if (!mathClick) {
+
+                num1 += button.getTag().toString();
+                textView.setText(num1);
+                System.out.println(num1);
+
+            } else {
+
+                num2 += button.getTag().toString();
+                textView.setText("");
+                textView.setText(num1  + mathText +  num2);
+                System.out.println(num2);
+            }
         }
 
 
