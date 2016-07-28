@@ -7,9 +7,3 @@ I am Using:
   <li>Android Studio 2.1.1</li>
   <li>API 23</li>
 </ul></p>
-
-Things I still need to add:
-<ul>
-  <li>DEL CLEAR function.</li> 
-  <li>Done</li> 
-  <li>Done.</li> 
