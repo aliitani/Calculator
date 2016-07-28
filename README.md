@@ -10,6 +10,6 @@ I am Using:
 
 Things I still need to add:
 <ul>
-  <li>DEL CLEAR function.</li>
-  <li>Decimal numbers</li>
-  <li>Numbers to show on screen when tapped.</li> 
+  <li>DEL CLEAR function.</li> 
+  <li>Decimal numbers</li> Done
+  <li>Numbers to show on screen when tapped.</li>  Done
