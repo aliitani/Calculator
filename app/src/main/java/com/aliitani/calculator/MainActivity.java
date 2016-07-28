@@ -1,14 +1,16 @@
 package com.aliitani.calculator;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     String num1 = "", num2 = "", mathAction = "", mathText = "";
     boolean mathClick = false, decimal = false, decDone1 = true, decDone2 = true;
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
     }
 }
