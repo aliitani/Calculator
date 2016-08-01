@@ -11,33 +11,44 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
     String num1 = "", num2 = "", mathAction = "", mathText = "";
-    boolean mathClick = false, decimal = false, decDone1 = true, decDone2 = true;
+    boolean mathClick = false, decimal = false, decDone1 = false, decDone2 = false, useAnswer = false, isDone = false;
     Button button;
-    TextView textView;
+    TextView screenView;
 
     public void Clear(View view) {
-        textView = (TextView) findViewById(R.id.Screen);
-        textView.setText("");
+        screenView = (TextView) findViewById(R.id.Screen);
+
+        screenView.setText("");
         num1 = "";
         num2 = "";
         mathClick = false;
+        mathAction = "";
         mathText = "";
         decimal = false;
-        decDone1 = true;
-        decDone2 = true;
-
+        decDone1 = false;
+        decDone2 = false;
+        useAnswer = false;
     }
 
     public void total(View view) {
-        textView = (TextView) findViewById(R.id.Screen);
+        screenView = (TextView) findViewById(R.id.Screen);
         String total = Calculation(num1,num2,mathAction);
+
         if (total.length() < 13) {
-            textView.setText(num1 + mathText + num2 + "\n" + total);
+            screenView.setText(num1 + mathText + num2 + "\n" + total);
+            num1 = total;
+            num2 = "";
+            useAnswer = true;
+            isDone = true;
         } else {
-            textView.setText(num1 + mathText + num2 + "\n" + total.substring(0, 12));
+            screenView.setText(num1 + mathText + num2 + "\n" + total.substring(0, 12));
+            num1 = total;
+            num2 = "";
+            useAnswer = true;
+            isDone = true;
         }
-        System.out.println(Calculation(num1, num2, mathAction));
     }
+
     public String Calculation(String a, String b, String key) {
 
 
@@ -59,26 +70,32 @@ public class MainActivity extends Activity {
                     return "" + (d1 * d2);
                 }
                 if (key.equals("Divide")) {
-                    System.out.println("Here");
-                    return "" + (d1/d2);
+                    if (d1 % d2 == 0) {
+                        return "" + d1/d2;
+                    }else {
+                        return "" + ((double) d1/d2);
+                    }
                 }
 
             }else {
-                int a1 = Integer.parseInt(a);
-                int b1 = Integer.parseInt(b);
+                int i1 = Integer.parseInt(a);
+                int i2 = Integer.parseInt(b);
 
                 if (key.equals("Sum")) {
-                    return "" + (a1 + b1);
+                    return "" + (i1 + i2);
                 }
                 if (key.equals("Diff")) {
-                   return "" + (a1 - b1);
+                   return "" + (i1 - i2);
                 }
                 if (key.equals("Product")) {
-                   return "" + a1 * b1;
+                   return "" + i1 * i2;
                 }
                 if (key.equals("Divide")) {
-                    System.out.println("Here");
-                    return "" + ((double) a1/b1);
+                    if (i1 % i2 == 0) {
+                        return "" + i1/i2;
+                    }else {
+                      return "" + ((double) i1/i2);
+                    }
                 }
 
                 }
@@ -92,57 +109,57 @@ public class MainActivity extends Activity {
 
     public void Math(View view){ // that is when we use + - * / and to use num2
         button = (Button) view;
-
+        screenView = (TextView) findViewById(R.id.Screen);
         mathAction = button.getTag().toString();
         mathText = button.getText().toString();
-        textView = (TextView) findViewById(R.id.Screen);
-        textView.append(button.getText().toString());
 
-        System.out.println(mathAction);
-
-        mathClick = true;
+        if(!useAnswer) {
+            screenView.append(mathText);
+            mathClick = true;
+        } else {
+            screenView.setText(num1 + mathText);
+            mathClick = true;
+            isDone = false;
+        }
     }
-    public void buttonTapped(View view) {
 
+    public void buttonTapped(View view) {
         button = (Button) view;
-        textView = (TextView) findViewById(R.id.Screen);
+        screenView = (TextView) findViewById(R.id.Screen);
+
+        if(isDone) {
+            isDone = false;
+            Clear(screenView);
+        }
 
         if (button.getTag().equals(".")) {
             decimal = true;
-
-            if (decDone1) {
-                decDone1 = false;
-                num1+= ".";
-                textView.setText(num1);
-                System.out.println(num1);
+            if (!mathClick) {
+                decDone1 = true;
+                num1 += ".";
+                screenView.setText(num1);
 
 
-            } else{
-                if (mathClick && decDone2) {
-                    num2 += ".";
-                    textView.setText("");
-                    textView.setText(num1 + mathText + num2);
-                    System.out.println(num2);
-                    decDone2 = false;
-                }
+            } else {
+                num2 += ".";
+                screenView.setText("");
+                screenView.setText(num1 + mathText + num2);
+                decDone2 = true;
+
             }
         }
-        if (!button.getTag().equals(".")){
+        if (!button.getTag().equals(".")) {
             if (!mathClick) {
 
                 num1 += button.getTag().toString();
-                textView.setText(num1);
-                System.out.println(num1);
+                screenView.setText(num1);
 
             } else {
-
                 num2 += button.getTag().toString();
-                textView.setText("");
-                textView.setText(num1  + mathText +  num2);
-                System.out.println(num2);
+                screenView.setText("");
+                screenView.setText(num1 + mathText + num2);
             }
         }
-
 
     }
 
