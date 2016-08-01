@@ -8,8 +8,5 @@ I am Using:
   <li>API 23</li>
 </ul></p>
 
-Things I still need to add:
-<ul>
-  <li>DEL CLEAR function.</li>
-  <li>Decimal numbers</li>
-  <li>Numbers to show on screen when tapped.</li> 
+###ScreenShot<br><br>
+![screenshot](https://cloud.githubusercontent.com/assets/19563826/17198823/491e773a-5446-11e6-902c-563357b023ce.PNG)
