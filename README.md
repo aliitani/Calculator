@@ -6,6 +6,7 @@ I am Using:
 <ul>
   <li>Android Studio 2.1.1</li>
   <li>API 23</li>
+  <li>SDK Ver.23</li>
 </ul></p>
 
 ###ScreenShot<br><br>
