@@ -2,10 +2,15 @@ package com.aliitani.calculator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 
 public class MainActivity extends Activity {
@@ -14,6 +19,7 @@ public class MainActivity extends Activity {
     boolean mathClick = false, decimal = false, decDone1 = false, decDone2 = false, useAnswer = false, isDone = false;
     Button button;
     TextView screenView;
+    String num1Display = "", num2Display = "",totalDisplay = "";
 
     public void Clear(View view) {
         screenView = (TextView) findViewById(R.id.Screen);
@@ -21,6 +27,9 @@ public class MainActivity extends Activity {
         screenView.setText("");
         num1 = "";
         num2 = "";
+        num1Display = "";
+        num2Display = "";
+        totalDisplay = "";
         mathClick = false;
         mathAction = "";
         mathText = "";
@@ -28,6 +37,7 @@ public class MainActivity extends Activity {
         decDone1 = false;
         decDone2 = false;
         useAnswer = false;
+        screenView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
     }
 
     public void total(View view) {
@@ -35,66 +45,90 @@ public class MainActivity extends Activity {
         String total = Calculation(num1,num2,mathAction);
 
         if (total.length() < 13) {
-            screenView.setText(num1 + mathText + num2 + "\n" + total);
+            screenView.setText(num1Display + mathText + num2Display + "\n" + total);
             num1 = total;
             num2 = "";
+            num1Display = total;
+            num2Display = "";
             useAnswer = true;
             isDone = true;
         } else {
-            screenView.setText(num1 + mathText + num2 + "\n" + total.substring(0, 12));
+            screenView.setText(num1Display + mathText + num2Display + "\n" + total.substring(0, 12));
             num1 = total;
             num2 = "";
+            num1Display = total;
+            num2Display = "";
             useAnswer = true;
             isDone = true;
         }
     }
 
     public String Calculation(String a, String b, String key) {
-
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
 
         try {
             if (decimal) {
-
                 double d1 = Double.parseDouble(a);
                 double d2 = Double.parseDouble(b);
 
+                double number = 0.0;
+                totalDisplay = "";
+
                 if (key.equals("Sum")) {
-                    return ""+ (d1+d2);
+                    number = d1+d2;
+                    totalDisplay = numberFormat.format(number);
+                    return ""+ totalDisplay;
                 }
                 if (key.equals("Diff")) {
-
-                    return "" + (d1 - d2);
+                    number = d1-d2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" + totalDisplay;
 
                 }
                 if (key.equals("Product")) {
-                    return "" + (d1 * d2);
+                    number = d1*d2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" + totalDisplay;
                 }
                 if (key.equals("Divide")) {
-                    if (d1 % d2 == 0) {
-                        return "" + d1/d2;
-                    }else {
-                        return "" + ((double) d1/d2);
-                    }
+                    number = d1/d2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" +totalDisplay;
                 }
 
             }else {
-                int i1 = Integer.parseInt(a);
-                int i2 = Integer.parseInt(b);
+                long i1 = Long.parseLong(a);
+                long i2 = Long.parseLong(b);
+
+
+                long number = 0;
+                totalDisplay = "";
 
                 if (key.equals("Sum")) {
-                    return "" + (i1 + i2);
+                    number = i1+i2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" + totalDisplay;
                 }
                 if (key.equals("Diff")) {
-                   return "" + (i1 - i2);
+                    number = i1-i2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" + totalDisplay;
                 }
                 if (key.equals("Product")) {
-                   return "" + i1 * i2;
+                    number = i1 * i2;
+                    totalDisplay = numberFormat.format(number);
+                    return "" + totalDisplay;
                 }
                 if (key.equals("Divide")) {
                     if (i1 % i2 == 0) {
-                        return "" + i1/i2;
+                        number = i1/i2;
+                        totalDisplay = numberFormat.format(number);
+                        return "" + totalDisplay;
                     }else {
-                      return "" + ((double) i1/i2);
+                        double numberd = (double) i1/i2;
+                        totalDisplay = numberFormat.format(numberd);
+                      return "" + totalDisplay;
                     }
                 }
 
@@ -117,7 +151,7 @@ public class MainActivity extends Activity {
             screenView.append(mathText);
             mathClick = true;
         } else {
-            screenView.setText(num1 + mathText);
+            screenView.setText(num1Display + mathText);
             mathClick = true;
             isDone = false;
         }
@@ -126,6 +160,14 @@ public class MainActivity extends Activity {
     public void buttonTapped(View view) {
         button = (Button) view;
         screenView = (TextView) findViewById(R.id.Screen);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+
+        String n = screenView.getText().toString();
+
+        if (n.length() > 13) {
+            screenView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+        }
 
         if(isDone) {
             isDone = false;
@@ -133,36 +175,46 @@ public class MainActivity extends Activity {
         }
 
         if (button.getTag().equals(".")) {
+
+
             decimal = true;
             if (!mathClick) {
                 decDone1 = true;
+
                 num1 += ".";
-                screenView.setText(num1);
 
 
+                screenView.setText(num1Display+ ".");
             } else {
                 num2 += ".";
-                screenView.setText("");
-                screenView.setText(num1 + mathText + num2);
+
+
+                screenView.setText(num1Display + mathText + num2Display +".");
                 decDone2 = true;
 
             }
         }
         if (!button.getTag().equals(".")) {
-            if (!mathClick) {
 
-                num1 += button.getTag().toString();
-                screenView.setText(num1);
 
-            } else {
-                num2 += button.getTag().toString();
-                screenView.setText("");
-                screenView.setText(num1 + mathText + num2);
-            }
+                if (!mathClick) {
+
+                    num1 += button.getTag().toString();
+
+                    num1Display = numberFormat.format(Double.parseDouble(num1));
+
+                    screenView.setText(num1Display);
+                } else {
+
+                    num2 += button.getTag().toString();
+
+                    num2Display = numberFormat.format(Double.parseDouble(num2));
+
+                    screenView.setText(num1Display + mathText + num2Display);
+                }
         }
 
     }
-
 
 
 
