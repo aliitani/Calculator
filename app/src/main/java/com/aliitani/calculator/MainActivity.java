@@ -42,21 +42,26 @@ public class MainActivity extends Activity {
 
     public void total(View view) {
         screenView = (TextView) findViewById(R.id.Screen);
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setGroupingUsed(true);
+
         String total = Calculation(num1,num2,mathAction);
 
+        String totalDisplay = numberFormat.format(Double.parseDouble(total));
+
         if (total.length() < 13) {
-            screenView.setText(num1Display + mathText + num2Display + "\n" + total);
+            screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay);
             num1 = total;
             num2 = "";
-            num1Display = total;
+            num1Display = totalDisplay;
             num2Display = "";
             useAnswer = true;
             isDone = true;
         } else {
-            screenView.setText(num1Display + mathText + num2Display + "\n" + total.substring(0, 12));
+            screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay.substring(0, 8));
             num1 = total;
             num2 = "";
-            num1Display = total;
+            num1Display = totalDisplay;
             num2Display = "";
             useAnswer = true;
             isDone = true;
@@ -64,77 +69,77 @@ public class MainActivity extends Activity {
     }
 
     public String Calculation(String a, String b, String key) {
-        NumberFormat numberFormat = NumberFormat.getInstance();
-        numberFormat.setGroupingUsed(true);
+
 
         try {
             if (decimal) {
                 double d1 = Double.parseDouble(a);
                 double d2 = Double.parseDouble(b);
 
-                double number = 0.0;
                 totalDisplay = "";
 
                 if (key.equals("Sum")) {
-                    number = d1+d2;
-                    totalDisplay = numberFormat.format(number);
-                    return ""+ totalDisplay;
+                    totalDisplay = Double.toString((double) (d1+d2));
+                    return totalDisplay;
                 }
                 if (key.equals("Diff")) {
-                    number = d1-d2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" + totalDisplay;
+                    totalDisplay = Double.toString((double) (d1-d2));
+                    return totalDisplay;
 
                 }
                 if (key.equals("Product")) {
-                    number = d1*d2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" + totalDisplay;
+                    totalDisplay = Double.toString((double) d1*d2);
+                    return totalDisplay;
                 }
                 if (key.equals("Divide")) {
-                    number = d1/d2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" +totalDisplay;
+                    totalDisplay = Double.toString((double) d1/d2);
+                    return totalDisplay;
                 }
 
             }else {
-                long i1 = Long.parseLong(a);
-                long i2 = Long.parseLong(b);
+                double i1 = Double.parseDouble(a);
+                double i2 = Double.parseDouble(b);
 
-
-                long number = 0;
                 totalDisplay = "";
 
                 if (key.equals("Sum")) {
-                    number = i1+i2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" + totalDisplay;
+                    if ((i1+i2) %  1 == 0) {
+                        totalDisplay = Integer.toString((int) (i1+i2));
+                    }else {
+                        totalDisplay = Double.toString((double) i1+i2);
+                    }
+                    return totalDisplay;
                 }
                 if (key.equals("Diff")) {
-                    number = i1-i2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" + totalDisplay;
+                    if ((i1-i2) %  1 == 0) {
+                        totalDisplay = Integer.toString((int) (i1-i2));
+                    }else {
+                        totalDisplay = Double.toString((double) i1-i2);
+                    }
+                    return totalDisplay;
                 }
                 if (key.equals("Product")) {
-                    number = i1 * i2;
-                    totalDisplay = numberFormat.format(number);
-                    return "" + totalDisplay;
+
+                    if ((i1*i2) %  1 == 0) {
+                        totalDisplay = Integer.toString((int) (i1-i2));
+                    }else {
+                        totalDisplay = Double.toString((double) i1-i2);
+                    }
+                    return totalDisplay;
                 }
                 if (key.equals("Divide")) {
                     if (i1 % i2 == 0) {
-                        number = i1/i2;
-                        totalDisplay = numberFormat.format(number);
-                        return "" + totalDisplay;
+                        totalDisplay = Integer.toString((int) (i1/i2));
+                        return totalDisplay;
                     }else {
-                        double numberd = (double) i1/i2;
-                        totalDisplay = numberFormat.format(numberd);
-                      return "" + totalDisplay;
+                        totalDisplay = Double.toString((double) i1/i2);
+                      return totalDisplay;
                     }
                 }
 
                 }
         } catch (Exception e) {
-
+            System.out.println("Caught Exception!" + e);
         }
 
 
@@ -147,11 +152,11 @@ public class MainActivity extends Activity {
         mathAction = button.getTag().toString();
         mathText = button.getText().toString();
 
-        if(!useAnswer) {
+        if(useAnswer == false) {
             screenView.append(mathText);
             mathClick = true;
         } else {
-            screenView.setText(num1Display + mathText);
+            screenView.setText(num1Display + "" + mathText);
             mathClick = true;
             isDone = false;
         }
@@ -197,7 +202,7 @@ public class MainActivity extends Activity {
         if (!button.getTag().equals(".")) {
 
 
-                if (!mathClick) {
+                if (mathClick == false) {
 
                     num1 += button.getTag().toString();
 
