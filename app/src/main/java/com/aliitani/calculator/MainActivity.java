@@ -49,23 +49,14 @@ public class MainActivity extends Activity {
 
         String totalDisplay = numberFormat.format(Double.parseDouble(total));
 
-        if (total.length() < 13) {
-            screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay);
-            num1 = total;
-            num2 = "";
-            num1Display = totalDisplay;
-            num2Display = "";
-            useAnswer = true;
-            isDone = true;
-        } else {
-            screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay.substring(0, 8));
-            num1 = total;
-            num2 = "";
-            num1Display = totalDisplay;
-            num2Display = "";
-            useAnswer = true;
-            isDone = true;
-        }
+        screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay);
+        num1 = total;
+        num2 = "";
+        num1Display = totalDisplay;
+        num2Display = "";
+        useAnswer = true;
+        isDone = true;
+
     }
 
     public String Calculation(String a, String b, String key) {
@@ -172,6 +163,8 @@ public class MainActivity extends Activity {
 
         if (n.length() > 13) {
             screenView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+        } else {
+            screenView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
         }
 
         if(isDone) {
