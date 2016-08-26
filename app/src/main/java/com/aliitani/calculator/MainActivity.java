@@ -112,9 +112,9 @@ public class MainActivity extends Activity {
                 if (key.equals("Product")) {
 
                     if ((i1*i2) %  1 == 0) {
-                        totalDisplay = Integer.toString((int) (i1-i2));
+                        totalDisplay = Integer.toString((int) (i1*i2));
                     }else {
-                        totalDisplay = Double.toString((double) i1-i2);
+                        totalDisplay = Double.toString((double) i1*i2);
                     }
                     return totalDisplay;
                 }
