@@ -44,18 +44,28 @@ public class MainActivity extends Activity {
         screenView = (TextView) findViewById(R.id.Screen);
         NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setGroupingUsed(true);
+        String total = "";
+        String totalDisplay = "";
 
-        String total = Calculation(num1,num2,mathAction);
+        try {
+            total = Calculation(num1, num2, mathAction);
 
-        String totalDisplay = numberFormat.format(Double.parseDouble(total));
+            totalDisplay = numberFormat.format(Double.parseDouble(total));
 
-        screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay);
-        num1 = total;
-        num2 = "";
-        num1Display = totalDisplay;
-        num2Display = "";
-        useAnswer = true;
-        isDone = true;
+            screenView.setText(num1Display + mathText + num2Display + "\n" + totalDisplay);
+            num1 = total;
+            num2 = "";
+            num1Display = totalDisplay;
+            num2Display = "";
+            mathText="";
+            useAnswer = true;
+            isDone = true;
+
+        } catch(Exception e){
+            System.out.println("Exceptions Caught" + e);
+        }
+
+
 
     }
 
