@@ -65,8 +65,6 @@ public class MainActivity extends Activity {
             System.out.println("Exceptions Caught" + e);
         }
 
-
-
     }
 
     public String Calculation(String a, String b, String key) {

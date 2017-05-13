@@ -11,320 +11,264 @@
     android:background="#0f7c86"
     android:visibility="visible">
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnCount="1"
-        android:rowCount="5"
-        android:clickable="true"
-        android:onClick="Math"
-        android:id="@+id/SymbolLayout"
-        android:visibility="visible"
-        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_below="@+id/Screen"
         android:layout_toEndOf="@+id/NumberLayout"
         android:layout_alignParentBottom="true">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CLR"
-            android:onClick="Clear"
             android:id="@+id/ClearButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="#888888"
-            android:textSize="20dp"
             android:clickable="true"
-            android:tag="Clear"
-            android:paddingTop="26sp"
+            android:onClick="Clear"
             android:paddingBottom="26sp"
-            android:layout_above="@+id/SymbolLayout"
-            android:layout_toEndOf="@+id/NumberLayout"
-            android:layout_row="0"
-            android:layout_column="0" />
+            android:paddingTop="26sp"
+            android:tag="Clear"
+            android:text="@string/CLR"
+            android:textSize="20sp" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="÷"
-            android:onClick="Math"
-            android:id="@+id/Divide"
-            android:background="#888888"
-            android:textSize="29dp"
-            android:layout_alignEnd="@+id/Screen"
-            android:layout_below="@+id/Clear"
-            android:layout_toEndOf="@+id/Six"
-            android:layout_alignStart="@+id/Clear"
-            android:layout_above="@+id/Multiply"
-            android:padding="25sp"
-            android:clickable="true"
-            android:tag="Divide"
-            android:layout_row="1"
-            android:layout_column="0" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="x"
-            android:onClick="Math"
-            android:id="@+id/Multiply"
-            android:background="#888888"
-            android:textSize="20dp"
-            android:layout_above="@+id/Subtract"
-            android:layout_alignEnd="@+id/Screen"
-            android:padding="25sp"
-            android:clickable="true"
-            android:tag="Product"
-            android:layout_row="2"
-            android:layout_column="0" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:id="@+id/Addition"
-            android:background="#888888"
-            android:layout_below="@+id/Subtract"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:padding="25sp"
-            android:onClick="Math"
-            android:clickable="true"
-            android:tag="Sum"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:textSize="20dp" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:onClick="Math"
             android:id="@+id/Subtract"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="#888888"
-            android:layout_alignParentEnd="true"
-            android:textSize="35dp"
-            android:layout_alignBottom="@+id/Three"
             android:clickable="true"
-            android:tag="Diff"
-            android:layout_row="4"
-            android:layout_column="0"
+            android:onClick="Math"
             android:paddingBottom="20dp"
-            android:paddingTop="20dp" />
+            android:paddingTop="20dp"
+            android:tag="Diff"
+            android:text="@string/subtract"
+            android:textSize="20sp" />
 
-    </GridLayout>
+        <Button
+            android:id="@+id/Addition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#888888"
+            android:clickable="true"
+            android:onClick="Math"
+            android:padding="25sp"
+            android:tag="Sum"
+            android:text="@string/add"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/Multiply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#888888"
+            android:clickable="true"
+            android:onClick="Math"
+            android:padding="25sp"
+            android:tag="Product"
+            android:text="@string/multiply"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/Divide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#888888"
+            android:clickable="true"
+            android:onClick="Math"
+            android:padding="25sp"
+            android:tag="Divide"
+            android:text="@string/divide"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <GridLayout
+        android:id="@+id/NumberLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:columnCount="4"
         android:rowCount="5"
-        android:id="@+id/NumberLayout"
-        android:clickable="true"
         android:visibility="visible"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Screen"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9"
             android:id="@+id/Nine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="0"
             android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
             android:padding="30sp"
-            android:textSize="35dp"
             android:tag="9"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:onClick="buttonTapped"
-            android:layout_above="@+id/Six"
-            android:layout_toEndOf="@+id/Eight"
-            android:layout_alignTop="@+id/ClearButton"
-            android:clickable="true"/>
+            android:text="@string/nine"
+            android:textSize="30sp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8"
             android:id="@+id/Eight"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:layout_row="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_column="1"
+            android:layout_row="0"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
             android:tag="8"
-            android:onClick="buttonTapped"
-            android:layout_above="@+id/Five"
-            android:layout_alignTop="@+id/Nine"
-            android:layout_alignStart="@+id/Five"
-            android:layout_toStartOf="@+id/Six"
-            android:clickable="true"/>
+            android:text="@string/eight"
+            android:textSize="30sp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
             android:id="@+id/Seven"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:tag="7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
             android:layout_row="0"
-            android:layout_column="0"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
             android:onClick="buttonTapped"
-            android:layout_below="@+id/Screen"
-            android:layout_alignParentStart="true"
-            android:layout_above="@+id/Four"
-            android:clickable="true" />
+            android:padding="30sp"
+            android:tag="7"
+            android:text="@string/seven"
+            android:textSize="30sp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6"
-            android:tag="6"
             android:id="@+id/Six"
-            android:onClick="buttonTapped"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:layout_row="1"
-            android:layout_column="2"
-            android:layout_alignTop="@+id/Five"
-            android:layout_toEndOf="@+id/Five"
-            android:clickable="true"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
-            android:tag="5"
+            android:layout_column="2"
+            android:layout_row="1"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
+            android:tag="6"
+            android:text="@string/six"
+            android:textSize="30sp" />
+
+        <Button
             android:id="@+id/Five"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:onClick="buttonTapped"
-            android:layout_above="@+id/Two"
-            android:layout_toEndOf="@+id/Four"
-            android:clickable="true"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
+            android:tag="5"
+            android:text="@string/five"
+            android:textSize="30sp" />
+
+        <Button
             android:id="@+id/Four"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
             android:layout_row="1"
-            android:layout_column="0"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
             android:tag="4"
-            android:layout_above="@+id/One"
-            android:layout_alignParentStart="true"
-            android:onClick="buttonTapped"
-            android:layout_below="@+id/Eight"
-            android:clickable="true"/>
+            android:text="@string/four"
+            android:textSize="30sp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"
-            android:tag="3"
             android:id="@+id/Three"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:layout_row="2"
-            android:layout_column="2"
-            android:onClick="buttonTapped"
-            android:layout_below="@+id/Six"
-            android:layout_toEndOf="@+id/Two"
-            android:clickable="true"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2"
-            android:tag="2"
+            android:layout_column="2"
+            android:layout_row="2"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
+            android:tag="3"
+            android:text="@string/three"
+            android:textSize="30sp" />
+
+        <Button
             android:id="@+id/Two"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:layout_above="@+id/Zero"
-            android:onClick="buttonTapped"
-            android:layout_alignStart="@+id/Five"
-            android:clickable="true"/>
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:tag="1"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
+            android:onClick="buttonTapped"
+            android:padding="30sp"
+            android:tag="2"
+            android:text="@string/two"
+            android:textSize="30sp" />
+
+        <Button
             android:id="@+id/One"
-            android:background="@color/accent_material_light"
-            android:padding="30sp"
-            android:textSize="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
             android:layout_row="2"
-            android:layout_column="0"
+            android:background="@color/accent_material_light"
+            android:clickable="true"
             android:onClick="buttonTapped"
-            android:layout_above="@+id/Equal"
-            android:layout_alignParentStart="true"
-            android:clickable="true"/>
+            android:padding="30sp"
+            android:tag="1"
+            android:text="@string/one"
+            android:textSize="30sp" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:tag="0"
             android:id="@+id/Zero"
-            android:background="@color/accent_material_light"
-            android:textSize="35dp"
-            android:layout_row="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_column="1"
-            android:onClick="buttonTapped"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/Two"
-            android:layout_toStartOf="@+id/Three"
-            android:clickable="true"
-            android:paddingTop="16.5sp"
-            android:paddingBottom="25sp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."
-            android:tag="."
-            android:id="@+id/Decimal"
+            android:layout_row="3"
             android:background="@color/accent_material_light"
+            android:clickable="true"
             android:onClick="buttonTapped"
-            android:textSize="35dp"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:layout_below="@+id/One"
-            android:layout_alignParentStart="true"
-            android:layout_alignBottom="@+id/Zero"
-            android:textAlignment="center"
-            android:paddingTop="16.5sp"
             android:paddingBottom="25sp"
-            android:clickable="true"/>
+            android:paddingTop="16.5sp"
+            android:tag="0"
+            android:text="@string/zero"
+            android:textSize="30sp" />
 
         <Button
+            android:id="@+id/Decimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="="
-            android:onClick="total"
-            android:id="@+id/Equal"
-            android:background="#d6bf4f4f"
-            android:textSize="35dp"
+            android:layout_column="0"
             android:layout_row="3"
-            android:layout_column="2"
-            android:layout_below="@+id/Two"
-            android:layout_toEndOf="@+id/Two"
+            android:background="@color/accent_material_light"
             android:clickable="true"
+            android:onClick="buttonTapped"
+            android:paddingBottom="25sp"
             android:paddingTop="16.5sp"
-            android:paddingBottom="25sp" />
+            android:tag="."
+            android:text="@string/decimal"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/Equal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_row="3"
+            android:background="#d6bf4f4f"
+            android:clickable="true"
+            android:onClick="total"
+            android:paddingBottom="25sp"
+            android:paddingTop="16.5sp"
+            android:text="@string/equal"
+            android:textSize="30sp" />
 
     </GridLayout>
 
@@ -338,6 +282,6 @@
         android:visibility="visible"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/SymbolLayout" />
+        android:layout_above="@+id/NumberLayout" />
 
 </RelativeLayout>
